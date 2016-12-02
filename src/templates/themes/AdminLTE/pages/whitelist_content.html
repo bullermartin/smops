@@ -1,0 +1,75 @@
+{% load tolist %}
+<div class="box-body table-responsive no-padding">
+    <table class="table table-hover">
+                    <tr id="trtitle">
+                        <th class="col-xs-1">序号</th>
+                        <th class="col-xs-2">IP地址/掩码</th>
+                        <th class="col-xs-7">备注</th>
+                        <th class="col-xs-2"></th>
+                    </tr>
+                    {% for wl in data.whitelist %}
+                        <tr>
+                            <td class="col-xs-1">{{ forloop.counter }}</td>
+                            <td class="col-xs-2">{{ wl.ip }}</td>
+                            <td class="col-xs-7">{{ wl.desc }}</td>
+                            <td class="col-xs-2"></td>
+                        </tr>
+                    {% endfor %}
+                    <tr id="trfooter">
+                        <td colspan="12">
+                            <ul class="list-unstyled list-inline" style="margin-bottom: 0px;">
+{#                                <li><label id="f1">全选</label></li>#}
+{#                                <li><label id="f2">取消</label></li>#}
+{#                                <li><label id="f3">反选</label></li>#}
+                                <li ac="add" onclick="whitelistops(this)"><label id="f4"  style="cursor: pointer">添加</label></li>
+{#                                <li ac="del" onclick="whitelistops(this)" style="cursor: pointer"><label id="f4" style="cursor: pointer">删除</label></li>#}
+                            </ul>
+                        </td>
+                    </tr>
+    </table>
+</div><!-- /.box-body -->
+
+<div id="pageinfo" class="row col-xs-12">
+        <div class="row" style="padding-bottom: 10px;">
+            <div class="col-xs-9">
+            <div class=" center-block">第{{ data.whitelist.start_index }}至{{ data.whitelist.end_index }}条 共{{ data.whitelist.paginator.count }}条记录</div>
+        </div>
+            <div class="col-xs-3">
+            <div class="">
+                <ul class="pagination right" style="margin: 0 0;">
+                    {% if data.whitelist.has_previous %}
+                        <li class="prev" onclick="getwhitelist({{ data.whitelist.previous_page_number }})" style="cursor: pointer"><a>上一页</a></li>
+                    {% else %}
+                       <li class="prev disabled"><a>上一页</a></li>
+                    {% endif %}
+
+                    {% for i in data.whitelist.number|tolist:data.whitelist.paginator.num_pages %}
+                        {% if data.whitelist.number == i %}
+                            <li class="active" onclick="getwhitelist({{ i }})" style="cursor: pointer"><a id="currentpage">{{ i }}</a></li>
+                        {% else %}
+                            <li onclick="getwhitelist({{ i }})" style="cursor: pointer"><a>{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if data.whitelist.has_next %}
+                       <li class="next" onclick="getwhitelist({{ data.whitelist.next_page_number }})" style="cursor: pointer"><a>下一页</a></li>
+                    {% else %}
+                         <li class="next disabled"><a>下一页</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        </div>
+
+</div>
+<script>
+    $(function(){
+        $('#whitehost_cu').attr('hid',"{{ data.hid }}");
+        $('#whitehost_cu').text("{{ data.current }}");
+        {% if data.code != '0' %}
+            $('#callbackresult').text("{{ data.error }}");
+        {% else %}
+            $('#callbackresult').text("{{ data.result }}");
+        {% endif %}
+    })
+
+</script>

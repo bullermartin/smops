@@ -1,0 +1,118 @@
+{% load staticfiles %}
+{% load tolist %}
+{% block right-content %}
+
+<div id="" class="col-xs-12 box box-primary">
+{#    <div class="box-body col-xs-12" style="padding: 0px 0px">#}
+{#        <div class="col-xs-12" style="padding: 0px 0px">#}
+{#            <ul class="list-inline"  style="padding: 0px 0px">#}
+{#                <li class="col-xs-2" style="padding: 0px 0px">业务名</li>#}
+{#                <li class="col-xs-2" style="padding: 0px 0px">当前版本</li>#}
+{#                <li class="col-xs-2" style="padding: 0px 0px">主机</li>#}
+{#                <li class="col-xs-2" style="padding: 0px 0px">主机IP</li>#}
+{#                <li class="col-xs-2" style="padding: 0px 0px">运行版本</li>#}
+{#            </ul>#}
+{#        </div>#}
+{#        <div class="col-xs-12" style="padding: 0px 0px">#}
+{#            {% for b in businesshostList %}#}
+{#                <div class="col-xs-4" style="padding: 0px 0px;">#}
+{#                    <ul class="list-inline">#}
+{#                        <li class="col-xs-6" rowspan="{{ b.hostnum }}" style="font-weight: bold;padding: 0px 0px;">{{ b.business.name }}</li>#}
+{#                        <li class="col-xs-6" rowspan="{{ b.hostnum }}" style="font-weight: bold;padding: 0px 0px;">{{ b.business.current_version }}</li>#}
+{#                    </ul>#}
+{#                </div>#}
+{#                <div class="col-xs-8" style="padding: 0px 0px;">#}
+{#                    {% for h in b.hostlist %}#}
+{#                        <div style="padding: 0px 0px">#}
+{#                            <ul class="list-inline" style="padding: 0px 0px">#}
+{#                                <li class="col-xs-4" style="padding: 0px 0px">{{ h.name }}</li>#}
+{#                                <li class="col-xs-4" style="padding: 0px 0px">{{ h.ipaddr }}</li>#}
+{#                                <li class="col-xs-4" style="padding: 0px 0px">{{ h.current_version }}</li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            {% endfor %}<br><br><br><br>#}
+{#        </div>#}
+    <div>
+        <table class="table">
+            <thead>
+                <th>业务名</th>
+                <th>当前版本</th>
+                <th>主机</th>
+                <th>主机IP</th>
+                <th>运行版本</th>
+            </thead>
+            <tbody class="">
+                {% for b in businesshostList %}
+                    <tr>
+                        <td rowspan="{{ b.hostnum }}" style="font-weight: bold;vertical-align:middle">{{ b.business.name }}</td>
+                        <td rowspan="{{ b.hostnum }}" style="font-weight: bold;vertical-align:middle">{{ b.business.current_version }}</td>
+                        {% for h in b.hostlist %}
+                            {% if forloop.first %}
+                            <td style="border-left: #ddd solid 2px">{{ h.name }}</td>
+                            <td>{{ h.ipaddr }}</td>
+                            <td>{{ h.current_version }}</td>
+                            {% else %}
+                                <tr>
+                                    <td style="border-left: #ddd solid 2px">{{ h.name }}</td>
+                                    <td>{{ h.ipaddr }}</td>
+                                    <td>{{ h.current_version }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+<div id="pageinfo" class="row col-xs-12">
+        <div class="row" style="padding-bottom: 10px;">
+            <div class="col-xs-9">
+            <div class=" center-block">第{{ businesshostList.start_index }}至{{ businesshostList.end_index }}条 共{{ businesshostList.paginator.count }}条记录</div>
+        </div>
+            <div class="col-xs-3">
+            <div class="">
+                <ul class="pagination right" style="margin: 0 0;">
+                    {% if businesshostList.has_previous %}
+                        <li class="prev" onclick="getverbusinesslist({{ businesshostList.previous_page_number }})" style="cursor: pointer"><a>上一页</a></li>
+                    {% else %}
+                       <li class="prev disabled"><a>上一页</a></li>
+                    {% endif %}
+
+                    {% for i in businesshostList.number|tolist:businesshostList.paginator.num_pages %}
+                        {% if businesshostList.number == i %}
+                            <li class="active" onclick="getverbusinesslist({{ i }})" style="cursor: pointer"><a id="currentpage">{{ i }}</a></li>
+                        {% else %}
+                            <li onclick="getverbusinesslist({{ i }})" style="cursor: pointer"><a>{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if businesshostList.has_next %}
+                       <li class="next" onclick="getverbusinesslist({{ businesshostList.next_page_number }})" style="cursor: pointer"><a>下一页</a></li>
+                    {% else %}
+                         <li class="next disabled"><a>下一页</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        </div>
+</div>
+</div>
+
+<script>
+    // 获取业务状态列表
+    function getverbusinesslist(page){
+        try{
+            page = parseInt(page);
+        }catch (error){
+            page = 1;
+        }
+        var csrftoken = getCookie('csrftoken');
+        $.post('{% url "apiindex" %}?ac=ver_business&page='+page,function(data,status){
+            $('.content').html(data);
+        });
+    }
+</script>
+
+{% endblock %}

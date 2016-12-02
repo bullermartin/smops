@@ -1,0 +1,38 @@
+{% load staticfiles %}
+{% block right-content %}
+<br>
+<form class="form-horizontal" method="post" action="{% url 'svnuserdetail' %}?ac=edit&id={{ svid }}" id="editsvnuserform">{% csrf_token %}
+  <div class="form-group">
+    <label class="col-sm-1 control-label">SVN名称</label>
+    <div class="col-sm-4">
+        {{ svnUserFormObj.name }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">用户名</label>
+    <div class="col-sm-4">
+        {{ svnUserFormObj.username }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">密码</label>
+    <div class="col-sm-4">
+        {{ svnUserFormObj.password }}
+    </div>
+  </div>
+  <div class="form-group" >
+    <label class="col-sm-1 control-label">主机</label>
+    <div class="col-sm-4">
+        {{ svnUserFormObj.host_id }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-10">
+      <button type="submit" class="btn btn-success">保存</button>
+    </div>
+  </div>
+</form>
+
+
+{% endblock %}

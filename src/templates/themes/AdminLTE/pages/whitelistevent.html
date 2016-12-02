@@ -1,0 +1,157 @@
+{% load staticfiles %}
+{% load calsub %}
+{% load caladd %}
+{% load tolist %}
+{% block right-content %}
+
+<div class="col-xs-12">
+    <div class="box box-primary">
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tr id="trtitle">
+                    <th>操作者</th>
+                    <th>IP地址/掩码</th>
+                    <th>操作</th>
+                    <th>状态</th>
+                    <th>来源IP</th>
+                    <th>描述</th>
+                    <th>时间</th>
+                </tr>
+                {% for e in eventList %}
+                    <tr>
+                        <td>{{ e.operator }}</td>
+                        <td>{{ e.ipaddr }}/{{ e.prefix }}</td>
+                        <td>{{ e.operation }}</td>
+                        <td>
+                            {% if e.status == 0 %}
+                                <span class="fa fa-check-circle" style="color:green">成功</span>
+                            {% else %}
+                                <span class="fa fa-minus-circle" style="color:red">失败</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ e.src_ip }}</td>
+                        <td>{{ e.desc }}</td>
+                        <td>{{ e.datetime }}</td>
+                    </tr>
+                {% endfor %}
+                <tr id="trfooter">
+                    <td colspan="7">
+                        <ul class="list-unstyled list-inline" style="margin-bottom: 0px;">
+{#                            <li><label id="f1">全选</label></li>#}
+{#                            <li><label id="f2">取消</label></li>#}
+{#                            <li><label id="f3">反选</label></li>#}
+{#                            <li><label id="f4">删除</label></li>#}
+{#                            <li><label id="f5" style="cursor:pointer;">添加</label></li>#}
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+
+
+    <div id="pageinfo" class="row">
+        <div class="col-xs-6">
+            <div class="dataTables_info">第{{ eventList.start_index }}至{{ eventList.end_index }}条 共{{ eventList.paginator.count }}条记录</div>
+        </div>
+        <div class="col-xs-6">
+            <div class="dataTables_paginate right-side">
+                <ul class="pagination" style="margin: 0 0;">
+                    {% if eventList.has_previous %}
+                        <li class="prev" onclick="getwhitelistevent(this, {{ eventList.previous_page_number }})" style="cursor: pointer"><a>上一页</a></li>
+                    {% else %}
+                       <li class="prev disabled"><a>上一页</a></li>
+                    {% endif %}
+
+                    {% for i in eventList.number|tolist:eventList.paginator.num_pages %}
+                        {% if eventList.number == i %}
+                            <li class="active" onclick="getwhitelistevent(this, {{ i }})" style="cursor: pointer"><a>{{ i }}</a></li>
+                        {% else %}
+                            <li onclick="getwhitelistevent(this, {{ i }})" style="cursor: pointer"><a>{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if eventList.has_next %}
+                       <li class="next" onclick="getwhitelistevent(this, {{ eventList.next_page_number }})" style="cursor: pointer"><a>下一页</a></li>
+                    {% else %}
+                         <li class="next disabled"><a>下一页</a></li>
+                    {% endif %}
+
+{#                    {% for i in '321' %}#}
+{#                        {% if eventList.number|calsub:i > 0 %}#}
+{#                            <li onclick="getwhitelistevent(this,{{ eventList.number|calsub:i }})" style="cursor: pointer"><a>{{ eventList.number|calsub:i }}</a></li>#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
+{#                    <li class="active" onclick="getwhitelistevent(this, {{ eventList.number }})" style="cursor: pointer"><a>{{ eventList.number }}</a></li>#}
+{#                    {% for i in 7|calsub:eventList.number|tolist %}#}
+{#                        {% if eventList.number|caladd:i < eventList.paginator.num_pages|caladd:1 %}#}
+{#                            <li onclick="getwhitelistevent(this,{{ eventList.number|caladd:i }})" style="cursor: pointer"><a>{{ eventList.number|caladd:i }}</a></li>#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // 获取白名单操作记录
+    function getwhitelistevent(ths, page){
+        var csrftoken = getCookie('csrftoken');
+        $.post('{% url "apiindex" %}?ac=whitelist_event&page='+page, {'csrfmiddlewaretoken':csrftoken}, function(data, status){
+            $('.content').html(data);
+{#            data = JSON.parse(data);#}
+{##}
+{#            var html = '';#}
+{#            html += '<tr>';#}
+{#            html += '<td>'+data['operator']+'</td>';#}
+{#            html += '<td>'+data['ipaddr']+'/'+data['prefix']+'</td>';#}
+{#            html += '<td>'+data['operation']+'</td>';#}
+{#            html += '<td>'+data['status']+'</td>';#}
+{#            html += '<td>'+data['src_ip']+'</td>';#}
+{#            html += '<td>'+data['desc']+'</td>';#}
+{#            html += '<td>'+data['datetime']+'</td>';#}
+{#            html += '</tr>';#}
+{#            $('#trtitle').nextUntil('#trfooter').remove();#}
+{#            $('#trtitle').after(html);#}
+{##}
+{#            // 处理分页信息#}
+{#            html = '';#}
+{#            html += '<div class="col-xs-6">';#}
+{#            html += '    <div class="dataTables_info">第{{ eventList.start_index }}至{{ eventList.end_index }}条 共{{ eventList.paginator.count }}条记录</div>';#}
+{#            html += '</div>';#}
+{#            html += '<div class="col-xs-6">';#}
+{#            html += '    <div class="dataTables_paginate right-side">';#}
+{#            html += '        <ul class="pagination" style="margin: 0 0;">';#}
+{#            html += '            {% if eventList.has_previous %}';#}
+{#            html += '                <li class="prev" onclick="getwhitelistevent(this, {{ eventList.previous_page_number }})" style="cursor: pointer"><a>上一页</a></li>';#}
+{#            html += '            {% else %}';#}
+{#            html += '               <li class="prev disabled"><a>上一页</a></li>';#}
+{#            html += '            {% endif %}';#}
+{#            html += '            {% for i in '321' %}';#}
+{#            html += '                {% if eventList.number|calsub:i > 0 %}';#}
+{#            html += '                    <li onclick="getwhitelistevent(this,{{ eventList.number|calsub:i }})" style="cursor: pointer"><a>{{ eventList.number|calsub:i }}</a></li>';#}
+{#            html += '                {% endif %}';#}
+{#            html += '            {% endfor %}';#}
+{#            html += '            <li class="active" onclick="getwhitelistevent(this, {{ eventList.number }})" style="cursor: pointer"><a>{{ eventList.number }}</a></li>';#}
+{#            html += '            {% for i in 7|calsub:eventList.number|tolist %}';#}
+{#            html += '                {% if eventList.number|caladd:i < eventList.paginator.num_pages|caladd:1 %}';#}
+{#            html += '                    <li onclick="getwhitelistevent(this,{{ eventList.number|caladd:i }})" style="cursor: pointer"><a>{{ eventList.number|caladd:i }}</a></li>';#}
+{#            html += '                {% endif %}';#}
+{#            html += '            {% endfor %}';#}
+{#            html += '            {% if eventList.has_next %}';#}
+{#            html += '               <li class="next" onclick="getwhitelistevent(this, {{ eventList.next_page_number }})" style="cursor: pointer"><a>下一页</a></li>';#}
+{#            html += '            {% else %}';#}
+{#            html += '                 <li class="next disabled"><a>下一页</a></li>';#}
+{#            html += '            {% endif %}';#}
+{#            html += '        </ul>';#}
+{#            html += '    </div>';#}
+{#            html += '</div>';#}
+{#            $('#pageinfo').html(html);#}
+        });
+    }
+
+</script>
+
+
+{% endblock %}

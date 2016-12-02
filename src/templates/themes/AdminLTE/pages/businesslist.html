@@ -1,0 +1,156 @@
+{% load staticfiles %}
+{% load tolist %}
+{% block right-content %}
+
+<div class="col-xs-12">
+    <div class="box box-primary"><!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tr>
+                    <th>业务名</th>
+                    <th>运行账户</th>
+                    <th>状态</th>
+                    <th>业务目录</th>
+                    <th>SVN目录</th>
+                    <th>创建时间</th>
+                </tr>
+                {% for b in businessList %}
+                    <tr>
+                        <td>{{ b.name }}</td>
+                        <td>{{ b.running_user }}</td>
+                        <td>
+                            {% if b.status == 0 %}
+                                <span class="fa fa-check-circle" style="color:green">正常</span>
+                            {% else %}
+                                <span class="fa fa-minus-circle" style="color:red">停止</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ b.directory }}</td>
+                        <td>{{ b.svn_dir }}</td>
+                        <td>{{ b.start_time }}</td>
+                        <td>
+{#                            <a class="btn btn-success" onclick="connect(this, {{ h.id }})"><span type="button" class="glyphicon glyphicon-transfer " aria-hidden="true"></span></a>#}
+                            <a class="btn btn-primary" onclick="editbusiness(this,{{ b.id }})"><span type="button" class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                            <a class="btn btn-danger" onclick="delbusiness(this,{{ b.id }})"><span type="button" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="7">
+                        <ul class="list-unstyled list-inline" style="margin-bottom: 0px;">
+{#                            <li><label id="f1">全选</label></li>#}
+{#                            <li><label id="f2">取消</label></li>#}
+{#                            <li><label id="f3">反选</label></li>#}
+{#                            <li><label id="f4">删除</label></li>#}
+                            <li onclick="addbusiness(this)" style="cursor:pointer;"><label id="f5" style="cursor:pointer;">添加</label></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+
+
+    <div id="pageinfo" class="row col-xs-12">
+        <div class="row" style="padding-bottom: 10px;">
+            <div class="col-xs-9">
+            <div class=" center-block">第{{ businessList.start_index }}至{{ businessList.end_index }}条 共{{ businessList.paginator.count }}条记录</div>
+        </div>
+            <div class="col-xs-3">
+            <div class="">
+                <ul class="pagination right" style="margin: 0 0;">
+                    {% if businessList.has_previous %}
+                        <li class="prev" onclick="getbusinesslist({{ businessList.previous_page_number }})" style="cursor: pointer"><a>上一页</a></li>
+                    {% else %}
+                       <li class="prev disabled"><a>上一页</a></li>
+                    {% endif %}
+
+                    {% for i in businessList.number|tolist:businessList.paginator.num_pages %}
+                        {% if businessList.number == i %}
+                            <li class="active" onclick="getbusinesslist({{ i }})" style="cursor: pointer"><a id="currentpage">{{ i }}</a></li>
+                        {% else %}
+                            <li onclick="getbusinesslist({{ i }})" style="cursor: pointer"><a>{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if businessList.has_next %}
+                       <li class="next" onclick="getbusinesslist({{ businessList.next_page_number }})" style="cursor: pointer"><a>下一页</a></li>
+                    {% else %}
+                         <li class="next disabled"><a>下一页</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // 获取运维用户列表
+    function getbusinesslist(page){
+        try{
+            page = parseInt(page);
+        }catch (error){
+            page = 1;
+        }
+        var csrftoken = getCookie('csrftoken');
+        $.post('{% url "apiindex" %}?ac=businesslist&page='+page,function(data,status){
+            $('.content').html(data);
+        });
+    }
+
+    // 添加业务
+    function addbusiness(ths){
+        $.get('{% url "businessdetail" %}?ac=add', function(data, status){
+            try{
+                data = JSON.parse(data);
+                if(data['code'] != '0'){
+                    alert(data['error']);
+                }
+            }catch (error){
+                $('.content').html(data);
+            }
+        });
+    }
+
+    // 修改业务
+    function editbusiness(ths,bid){
+        $.get('{% url "businessdetail" %}?ac=edit&id='+bid, function(data, status){
+            try{
+                data = JSON.parse(data);
+                if(data['code'] != '0'){
+                    alert(data['error']);
+                }
+            }catch (error){
+                $('.content').html(data);
+            }
+
+        });
+    }
+
+    // 删除业务
+    function delbusiness(ths,bid){
+        if(confirm('确定是否要删除')){
+            $.get('{% url "businessdetail" %}?ac=delete&id='+bid, function(data, status){
+                try{
+                    data = JSON.parse(data);
+                    if(data['code'] != '0'){
+                        alert(data['error']);
+                    }else {
+                        $.post('{% url "apiindex" %}?ac=businesslist', function(data, status){
+                            $('.content').html(data);
+                        });
+                        alert(data['result']);
+                    }
+                }catch (error){
+                    $('.content').html(data);
+                }
+            });
+        }
+
+    }
+
+</script>
+
+
+{% endblock %}

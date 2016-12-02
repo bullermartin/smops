@@ -1,0 +1,121 @@
+{% load staticfiles %}
+{% load tolist %}
+{% block right-content %}
+
+<div class="col-xs-12">
+    <div class="box box-primary"><!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tr>
+                    <th>SVN服务器</th>
+                    <th>SVN名称</th>
+                    <th>用户名</th>
+                    <th>关联业务</th>
+                    <th></th>
+                </tr>
+                {% for sv in svnuserList %}
+                    <tr>
+                        <td>{{ sv.host }}</td>
+                        <td>{{ sv.name }}</td>
+                        <td>{{ sv.username }}</td>
+                        <td>{{ sv.business }}</td>
+                        <td>
+                            <a class="btn btn-primary" onclick="editsvnuser(this,{{ sv.id }})"><span type="button" class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                            <a class="btn btn-danger" onclick="delsvnuser(this,{{ sv.id }})"><span type="button" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="6">
+                        <ul class="list-unstyled list-inline" style="margin-bottom: 0px;">
+{#                            <li><label id="f1">全选</label>#}
+{#                            <li><label id="f2">取消</label>#}
+{#                            <li><label id="f3">反选</label>#}
+{#                            <li><label id="f4">删除</label>#}
+                            <li onclick="addsvnuser(this)" style="cursor: pointer;"><label id="f5" style="cursor: pointer;">添加</label>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+
+
+<div id="pageinfo" class="row col-xs-12">
+        <div class="row" style="padding-bottom: 10px;">
+            <div class="col-xs-9">
+            <div class=" center-block">第{{ svnuserList.start_index }}至{{ svnuserList.end_index }}条 共{{ svnuserList.paginator.count }}条记录</div>
+        </div>
+            <div class="col-xs-3">
+            <div class="">
+                <ul class="pagination right" style="margin: 0 0;">
+                    {% if svnuserList.has_previous %}
+                        <li class="prev" onclick="getsvnuserlist({{ svnuserList.previous_page_number }})" style="cursor: pointer"><a>上一页</a></li>
+                    {% else %}
+                       <li class="prev disabled"><a>上一页</a></li>
+                    {% endif %}
+
+                    {% for i in svnuserList.number|tolist:svnuserList.paginator.num_pages %}
+                        {% if svnuserList.number == i %}
+                            <li class="active" onclick="getsvnuserlist({{ i }})" style="cursor: pointer"><a id="currentpage">{{ i }}</a></li>
+                        {% else %}
+                            <li onclick="getsvnuserlist({{ i }})" style="cursor: pointer"><a>{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if svnuserList.has_next %}
+                       <li class="next" onclick="getsvnuserlist({{ svnuserList.next_page_number }})" style="cursor: pointer"><a>下一页</a></li>
+                    {% else %}
+                         <li class="next disabled"><a>下一页</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        </div>
+</div>
+
+</div>
+
+<script>
+    // 获取运维用户列表
+    function getsvnuserlist(page){
+        try{
+            page = parseInt(page);
+        }catch (error){
+            page = 1;
+        }
+        var csrftoken = getCookie('csrftoken');
+        $.post('{% url "apiindex" %}?ac=svnuser&page='+page,function(data,status){
+            $('.content').html(data);
+        });
+    }
+
+    // 处理添加SVN用户操作
+    function addsvnuser(ths){
+        $.get('{% url "svnuserdetail" %}?ac=add',function(data, status){
+            $('.content').html(data);
+        });
+    }
+
+    // 处理编辑系统用户信息操作
+    function editsvnuser(ths, uid){
+        $.get('{% url "svnuserdetail" %}?ac=edit&id='+uid,function(data, status){
+            $('.content').html(data);
+        });
+    }
+
+    // 处理系统用户删除操作
+    function delsvnuser(ths, uid){
+        if(confirm('确定是否要删除')){
+            $.get('{% url "svnuserdetail" %}?ac=delete&id='+uid, function(odata, status){
+                $.post('{% url "apiindex" %}?ac=svnuser', function(ndata, status){
+                    $('.content').html(ndata);
+                })
+                alert(odata);
+            });
+        }else{}
+    }
+
+</script>
+
+
+{% endblock %}

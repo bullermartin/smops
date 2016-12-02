@@ -1,0 +1,162 @@
+{% load staticfiles %}
+{% load tolist %}
+{% block right-content %}
+<div class="col-xs-12">
+    <div class="box box-primary"><!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tr>
+                    <th>主机名</th>
+                    <th>IP地址/掩码</th>
+                    <th>端口</th>
+                    <th>状态</th>
+                    <th>描述</th>
+                    <th>添加时间</th>
+                    <th>变更时间</th>
+                    <th></th>
+                </tr>
+                {% for h in hostList %}
+                    <tr>
+                        <td>{{ h.name }}</td>
+                        <td>{{ h.ipaddr }}/{{ h.prefix }}</td>
+                        <td>{{ h.port }}</td>
+                        <td>
+                            {% if h.status == 0 %}
+                                <span class="fa fa-check-circle" style="color:green">正常</span>
+                            {% else %}
+                                <span class="fa fa-minus-circle" style="color:red">关闭</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ h.desc }}</td>
+                        <td>{{ h.add_time }}</td>
+                        <td>{{ h.modify_time }}</td>
+                        <td>
+{#                            <a class="btn btn-success" onclick="connect(this, {{ h.id }})"><span type="button" class="glyphicon glyphicon-transfer " aria-hidden="true"></span></a>#}
+                            <a class="btn btn-primary" onclick="edithost(this,{{ h.id }})"><span type="button" class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                            <a class="btn btn-danger" onclick="delhost(this,{{ h.id }})"><span type="button" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="7">
+                        <ul class="list-unstyled list-inline" style="margin-bottom: 0px;">
+{#                            <li><label id="f1">全选</label></li>#}
+{#                            <li><label id="f2">取消</label></li>#}
+{#                            <li><label id="f3">反选</label></li>#}
+{#                            <li><label id="f4">删除</label></li>#}
+                            <li onclick="addhost(this)"><label id="f5" style="cursor:pointer;">添加</label></li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="list-unstyled list-inline" style="margin-bottom: 0px;">
+                            <li class="input-group  form-inline">
+                                  <input type="text" class="" id="keyword" placeholder="搜索主机">
+                                  <button type="submit" class=" inline btn btn-primary" onclick="searchhost(this)">搜索</button>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+
+<div id="pageinfo" class="row col-xs-12">
+        <div class="row" style="padding-bottom: 10px;">
+            <div class="col-xs-9">
+            <div class=" center-block">第{{ hostList.start_index }}至{{ hostList.end_index }}条 共{{ hostList.paginator.count }}条记录</div>
+        </div>
+            <div class="col-xs-3">
+            <div class="">
+                <ul class="pagination right" style="margin: 0 0;">
+                    {% if hostList.has_previous %}
+                        <li class="prev" onclick="gethostlist({{ hostList.previous_page_number }})" style="cursor: pointer"><a>上一页</a></li>
+                    {% else %}
+                       <li class="prev disabled"><a>上一页</a></li>
+                    {% endif %}
+
+                    {% for i in hostList.number|tolist:hostList.paginator.num_pages %}
+                        {% if hostList.number == i %}
+                            <li class="active" onclick="gethostlist({{ i }})" style="cursor: pointer"><a id="currentpage">{{ i }}</a></li>
+                        {% else %}
+                            <li onclick="gethostlist({{ i }})" style="cursor: pointer"><a>{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if hostList.has_next %}
+                       <li class="next" onclick="gethostlist({{ hostList.next_page_number }})" style="cursor: pointer"><a>下一页</a></li>
+                    {% else %}
+                         <li class="next disabled"><a>下一页</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        </div>
+</div>
+
+
+</div>
+
+<script>
+    // 获取主机列表
+    function gethostlist(page){
+        try{
+            page = parseInt(page);
+        }catch (error){
+            page = 1;
+        }
+        var csrftoken = getCookie('csrftoken');
+        $.post('{% url "apiindex" %}?ac=hostlist&page='+page,function(data,status){
+            $('.content').html(data);
+        });
+    }
+
+    // 添加主机
+    function addhost(ths){
+        $.get('{% url "hostdetail" %}?ac=add', function(data, status){
+            $('.content').html(data);
+        });
+    }
+
+    // 编辑主机信息
+    function edithost(ths, hid){
+        $.get('{% url "hostdetail" %}?ac=edit&id='+hid,function(data, status){
+            $('.content').html(data);
+        });
+    }
+
+    // 删除主机
+    function delhost(ths, hid) {
+        if(confirm('确定是否要删除')){
+            $.get('{% url "hostdetail" %}?ac=delete&id='+hid,function(data, status){
+                $.post('{% url "apiindex" %}?ac=hostlist', function(data, status){
+                    $('.content').html(data);
+                });
+                alert(data);
+            });
+        }else{}
+    }
+
+    // 搜索主机
+    function searchhost(ths){
+        var content = $('#keyword').val()
+        console.log($('#keyword').val())
+        if(content.length != 0){
+            $.get('{% url "hostdetail" %}?ac=search&kw='+content, function(data,status){
+                try{
+                    data = JSON.parse(data);
+                    if(data['code'] != '0'){
+                        alert(data['error'])
+                    }
+                }catch(error){
+                    $('.content').html(data);
+                }
+            });
+        }
+    }
+
+
+
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,97 @@
+{% load staticfiles %}
+{% block right-content %}
+<br>
+{#<div class="form-horizontal" method="post" action="{% url 'moduledetail' %}?ac=add" id="moduledetail">{% csrf_token %}#}
+<div>
+  <div class="form-group col-xs-12">
+    <label class="col-xs-1 control-label">用户列表</label>
+    <div class="col-xs-4">
+        <select id="currentuser" onchange="getmodulelist(this)" style="width: 150px">
+            <option value="0">--------</option>
+            {% for u in userList %}
+                <option value="{{ u.id }}">{{ u.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-xs-12">
+        <label class="col-xs-2 control-label">当前模块</label>
+        <label class="col-xs-1 control-label"></label>
+        <label class="col-xs-2 control-label">可用模块</label>
+    </div>
+    <div class="col-xs-12">
+        <div class="col-xs-2">
+            <select multiple="multiple" size="5" style="width: 150px" name="modulelist" id="left">
+            </select>
+        </div>
+        <div class="col-xs-1">
+                <p class="btn btn-default navbar-btn" id="addtoleft"><<</p><br>
+                <p class="btn btn-default navbar-btn" id="addtoright" >>></p>
+        </div>
+
+        <div class="col-xs-2">
+            <select multiple="multiple" size="5" style="width: 150px" name='availablelist' id="right">
+            </select>
+        </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-xs-offset-1 col-xs-10">
+      <button id='btn-ugedit' onclick="modulesubmit()" class="btn btn-success">保存</button>
+    </div>
+  </div>
+</div>
+
+<script>
+    $('#addtoleft').bind('click',function(){
+        $('#right').find('option:selected').appendTo('#left');
+    });
+    $('#addtoright').bind('click',function(){
+        $('#left').find('option:selected').appendTo('#right');
+    });
+
+    // 获取指定用户有权限的模块信息
+    function getmodulelist(ths){
+        var cu = $('#currentuser').val();
+        if(cu == '0'){return}
+        $.get('{% url "moduledetail" %}?ac=modulelist&id='+cu,function(data,status){
+            data = JSON.parse(data);
+            if(data['code'] != '0'){alert(data['error'])}else {
+                var html = '';
+                for(m in data['moduleList']){
+                    html += '<option value="'+ data['moduleList'][m].id+'">'+ data['moduleList'][m].desc+'</option>';
+                }
+                $('#left').html(html);
+                html = '';
+                for(m in data['availableList']){
+                    html += '<option value="'+ data['availableList'][m].id+'">'+ data['availableList'][m].desc+'</option>';
+                }
+                $('#right').html(html);
+            }
+        });
+    }
+
+    // 点击提交模块权限修改
+    function modulesubmit() {
+        var moduleList = [];
+        var availableList = [];
+        var cu = $('#currentuser').val();
+        if(cu == '0'){return}
+        var csrftoken = getCookie('csrftoken');
+        $('#left option').each(function(){
+            moduleList.push(parseInt($(this).attr('value')));
+        });
+        moduleList = JSON.stringify(moduleList);
+        $.post('{% url "moduledetail" %}?ac=modulelist&id='+cu,{'csrfmiddlewaretoken':csrftoken,'moduleList':moduleList},function(data,status){
+            data = JSON.parse(data);
+            if(data['code'] != '0'){alert(data['error'])}else {
+                window.location.href="/";
+            }
+        });
+    }
+
+</script>
+
+{% endblock %}

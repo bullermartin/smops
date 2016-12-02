@@ -1,0 +1,169 @@
+{% load staticfiles %}
+{% load tolist %}
+{% block right-content %}
+
+<div id="" class="col-xs-12 box box-primary">
+    <div class="box-header">
+        <p><a style="font-weight: bold">版本回滚</a></p>
+    </div>
+    <div class="box-body">
+        <table>
+            <tr>
+                <td><p>待回滚业务：</p></td>
+                <td>
+                    <select id="business" onchange="getversionlist()" style="width: 250px">
+                        <option value="0">----------</option>
+                        {% for b in businessList %}
+                            <option value="{{ b.id }}">{{ b.name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><p>选择版本：</p></td>
+                <td>
+                    <select id="verlist" style="width: 250px">
+                        <option value="">----------</option>
+                    </select>
+                    <span class="fa fa-repeat" onclick="getoperation('ver_publish')" style="cursor: pointer"></span>
+                    <a id="current_ver"></a>
+                </td>
+            </tr>
+            <tr>
+                <td><p>选择业务主机：</p><p><a>*按住CTRL键选择多个主机</a></p></td>
+                <td>
+                    <select id="businesshost" multiple size="5" style="width: 250px">
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+                <td><p>回滚描述：</p></td>
+                <td>
+                    <textarea id="updatedesc" cols="60" rows="5" maxlength="255"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td><p>通知：</p><p><a>*暂时不支持</a></p></td>
+                <td><textarea cols="60" rows="5" maxlength="255"></textarea></td>
+            </tr>
+        </table>
+        <div>
+            <button class="btn btn-success" onclick="publishconfirm(this)">确认回滚</button>
+            <div id="publishpop"></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // 获取业务回滚版本列表
+    function getversionlist(page){
+        var business = $('#business').val();
+        if($('#business').val() == ''){
+            return
+        }
+        var csrftoken = getCookie('csrftoken');
+        $.post('{% url "versiondetail" %}?ac=rlist&id='+business,{'csrfmiddlewaretoken':csrftoken},function(data,status){
+            data = JSON.parse(data);
+            if (data['code'] != '0'){
+                    alert(data['error']);
+                    $('#callbackresult').text(data['error']);
+            }else{
+                $('#business option[value=0]').remove();
+                $('#current_ver').html('<span>当前版本:&nbsp;</span><span>'+data['current_ver']+'</span>');
+                var html = '';
+                for(i in data['verlist']){
+                    html += '<option value="'+data['verlist'][i]['id']+'">'+data['verlist'][i]['ver']+'</option>';
+                }
+                $('#verlist').html(html);
+                html = '';
+                for(i in data['hostlist']){
+                    html += '<option value="'+data['hostlist'][i]['id']+'">'+data['hostlist'][i]['name']+'</option>';
+                }
+                $('#businesshost').html(html);
+            }
+        });
+    }
+
+    // 回滚版本待确认
+    function publishconfirm(ths){
+        var businessname = $('#business option:selected').text();
+        var new_ver = $('#verlist option:selected').text();
+        var current_ver = $('#current_ver span:last').text();
+        var desc = $('#updatedesc').val();
+        var html = '<div id="confirmform" style="z-index:999;border-radius: 4px;display: block;background-color:#f9f9f9;overflow: hidden;position: fixed;height:200px;width:400px;left: 50%; top: 50%;">' +
+                    '    <div class="popTitle" style="background-color:#3c8dbc;display: block; cursor: pointer;height:30px">' +
+                    '        <p><span class="text">版本回滚确认</span>' +
+                    '        <span class="close" style="color:red;" onclick="closediv('+'\'confirmform\''+')">x</span></p>' +
+                    '    </div>' +
+                    '    <div>' +
+                    '        <div style="cursor:default">' +
+                    '            <div>' +
+                    '            <table id="objper">' +
+                    '                <tr>' +
+                    '                    <td>业务名：</td>' +
+                    '                    <td>'+businessname+'</td>' +
+                    '                </tr>' +
+                    '                <tr>' +
+                    '                    <td>当前版本：</td>' +
+                    '                    <td>'+current_ver+'</td>' +
+                    '                </tr>' +
+                    '                <tr>' +
+                    '                    <td>回滚版本：</td>' +
+                    '                    <td>'+new_ver+'</td>' +
+                    '                <tr>' +
+                    '                <tr>' +
+                    '                    <td>回滚详情：</td>' +
+                    '                    <td>'+desc+'</td>' +
+                    '                <tr>' +
+                    '                <tr>' +
+                    '                    <td>确定回滚：</td>' +
+                    '                    <td><input id="reallyconfirm" type="checkbox"></td>' +
+                    '                <tr>' +
+                    '            </table>' +
+                    '            <button type="button" onclick="publish(this)">确定</button>' +
+                    '            <button type="button" onclick="closediv('+'\'confirmform\''+')">取消</button>' +
+                    '            <p></p>' +
+                    '            </div>' +
+                    '        </div>' +
+                    '    </div>' +
+                    '</div>';
+        if($('#business').val() == '0'){$('#publishpop').html('<span style="color:red">请选择业务</span>');return}
+        if($('#updatedesc').val() == ''){$('#publishpop').html('<span style="color:red">更新描述不能为空</span>');return}
+        $('#publishpop').html(html);
+
+    }
+
+    // 确认回滚
+    function publish(ths){
+        if( !$('#reallyconfirm').is(':checked')){return}
+        var business = $('#business').val();
+        var data = {
+            'business': business,
+            'new_ver': $('#verlist option:selected').text(),
+            'desc': $('#updatedesc').val(),
+            'hostlist':$('#businesshost').val(),
+        }
+
+        var csrftoken = getCookie('csrftoken');
+        data = JSON.stringify(data);
+        $.post('{% url "versiondetail" %}?ac=rollback&id='+business,{'data':data, 'csrfmiddlewaretoken':csrftoken},function(data,status) {
+            try{
+                data = JSON.parse(data);
+            }catch (error){
+                $('.content').html(data);
+            }
+        });
+        closediv('confirmform');
+    }
+
+    // 删除弹出框
+    function closediv(divname){
+            $('#'+divname).remove();
+    }
+
+</script>
+
+
+{% endblock %}

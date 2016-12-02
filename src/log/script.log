@@ -1,0 +1,697 @@
+2016-07-18 19:02:03,638 [Thread-3:6692] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-07-19 10:15:40,730 [Thread-25:13968] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-07-19 10:15:41,914 [Thread-38:10204] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-07-19 10:15:42,509 [Thread-51:14488] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-07-19 10:15:43,710 [Thread-67:14736] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-07-19 10:16:05,404 [Thread-2:8356] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\views.py", line 13, in index
+    return HttpResponse(json.dumps(render(request, 'index.html', {'moduleList': moduleList}).content))
+  File "c:\python35\Lib\json\__init__.py", line 230, in dumps
+    return _default_encoder.encode(obj)
+  File "c:\python35\Lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "c:\python35\Lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "c:\python35\Lib\json\encoder.py", line 180, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: b'\n<input type=\'hidden\' name=\'csrfmiddlewaretoken\' value=\'TUMznhJdh0rMB8GtBmX90FlZDzh0hPlX\' />\n<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset="UTF-8">\n        <title>\xe8\xbf\x90\xe7\xbb\xb4\xe5\xb9\xb3\xe5\x8f\xb0</title>\n        <meta content=\'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\' name=\'viewport\'>\n        <!-- bootstrap 3.0.2 -->\n        <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css" />\n        <!-- font Awesome -->\n        <link href="/static/css/font-awesome.min.css" rel="stylesheet" type="text/css" />\n        <!-- Ionicons -->\n        <link href="/static/css/ionicons.min.css" rel="stylesheet" type="text/css" />\n        <!-- Theme style -->\n        <link href="/static/css/AdminLTE.css" rel="stylesheet" type="text/css" />\n\n        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->\n        <!-- WARNING: Respond.js doesn\'t work if you view the page via file:// -->\n        <!--[if lt IE 9]>\n          <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>\n          <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>\n        <![endif]-->\n    </head>\n    <body class="skin-blue">\n\n        <!-- header logo: style can be found in header.less -->\n        <header class="header">\n\n            <a href="" class="logo">\n                <!-- Add the class icon to your logo image or logo icon to add the margining -->\n                \xe8\xbf\x90\xe7\xbb\xb4\xe5\xb9\xb3\xe5\x8f\xb0\n            </a>\n            <!-- Header Navbar: style can be found in header.less -->\n            <nav class="navbar navbar-static-top" role="navigation">\n                <!-- Sidebar toggle button-->\n                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">\n                    <span class="sr-only">Toggle navigation</span>\n                    <span class="icon-bar"></span>\n                    <span class="icon-bar"></span>\n                    <span class="icon-bar"></span>\n                </a>\n                <div class="navbar-right">\n                    <ul class="nav navbar-nav">\n\n                        <!-- User Account: style can be found in dropdown.less -->\n                        <li class="dropdown user user-menu">\n                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">\n                                <i class="glyphicon glyphicon-user"></i>\n                                \n                                <span>Admin<i class="caret"></i></span>\n                            </a>\n                            <ul class="dropdown-menu">\n                                <!-- User image -->\n                                <li class="user-header bg-light-blue">\n                                    <img src="/static/img/avatar3.png" class="img-circle" alt="User Image" />\n                                    <p>\n                                        \n                                        <small>\xe6\xb3\xa8\xe5\x86\x8c\xe6\x97\xb6\xe9\x97\xb4\xef\xbc\x9a2016\xe5\xb9\xb47\xe6\x9c\x884\xe6\x97\xa5 17:34</small>\n                                    </p>\n                                </li>\n                                <!-- Menu Footer-->\n                                <li class="user-footer">\n                                    <div class="pull-left">\n                                        <a href="#" class="btn btn-default btn-flat" onclick="edituser(this,1)">\xe4\xbf\xae\xe6\x94\xb9\xe4\xbf\xa1\xe6\x81\xaf</a>\n                                    </div>\n                                    <div class="pull-right">\n                                        <a href="/logout/" class="btn btn-default btn-flat">\xe6\xb3\xa8\xe9\x94\x80</a>\n                                    </div>\n                                </li>\n                            </ul>\n                        </li>\n                    </ul>\n                </div>\n            </nav>\n        </header>\n\n        <div class="wrapper row-offcanvas row-offcanvas-left">\n            <!-- Left side column. contains the logo and sidebar -->\n            <aside class="left-side sidebar-offcanvas">                \n                <!-- sidebar: style can be found in sidebar.less -->\n                <section class="sidebar">\n                    <!-- Sidebar \xe5\x9c\xa8\xe7\xba\xbf\xe7\x94\xa8\xe6\x88\xb7 -->\n                    <div class="user-panel">\n                        <div class="pull-left image">\n                            <img src="/static/img/avatar3.png" class="img-circle" alt="User Image" />\n                        </div>\n                        <div class="pull-left info">\n                            <p>Hello, Admin</p>\n                        </div>\n                    </div>\n                    <!-- Sidebar \xe5\x9c\xa8\xe7\xba\xbf\xe7\x94\xa8\xe6\x88\xb7 -->\n                    <!-- \xe6\x90\x9c\xe7\xb4\xa2\xe6\xa1\x86\xe5\xbc\x80\xe5\xa7\x8b -->\n\n\n\n\n\n\n\n\n                    <!-- \xe6\x90\x9c\xe7\xb4\xa2\xe6\xa1\x86\xe7\xbb\x93\xe6\x9d\x9f -->\n\n                    <!-- \xe5\xb7\xa6\xe4\xbe\xa7\xe8\x8f\x9c\xe5\x8d\x95\xe5\xbc\x80\xe5\xa7\x8b -->\n                    <ul class="sidebar-menu">\n                        \n                            <li id="whitlist_mgt" class="treeview">\n                                <a href="#">\n                                    <span>\xe7\x99\xbd\xe5\x90\x8d\xe5\x8d\x95\xe7\xae\xa1\xe7\x90\x86</span>\n                                    <i class="fa fa-angle-left pull-right"></i>\n                                </a>\n                                <ul class="treeview-menu">\n                                    \n                                        <li id="whitelist"><a href="#" onclick="getoperation(\'whitelist\')"><i class="fa fa-angle-double-right"></i>\xe7\x99\xbd\xe5\x90\x8d\xe5\x8d\x95</a></li>\n                                    \n                                        <li id="whitelist_event"><a href="#" onclick="getoperation(\'whitelist_event\')"><i class="fa fa-angle-double-right"></i>\xe6\x93\x8d\xe4\xbd\x9c\xe8\xae\xb0\xe5\xbd\x95</a></li>\n                                    \n                                </ul>\n                            </li>\n                        \n                            <li id="user_mgt" class="treeview">\n                                <a href="#">\n                                    <span>\xe7\x94\xa8\xe6\x88\xb7\xe7\xae\xa1\xe7\x90\x86</span>\n                                    <i class="fa fa-angle-left pull-right"></i>\n                                </a>\n                                <ul class="treeview-menu">\n                                    \n                                        <li id="ywuser"><a href="#" onclick="getoperation(\'ywuser\')"><i class="fa fa-angle-double-right"></i>\xe8\xbf\x90\xe7\xbb\xb4\xe7\x94\xa8\xe6\x88\xb7</a></li>\n                                    \n                                        <li id="sysuser"><a href="#" onclick="getoperation(\'sysuser\')"><i class="fa fa-angle-double-right"></i>\xe7\xb3\xbb\xe7\xbb\x9f\xe7\x94\xa8\xe6\x88\xb7</a></li>\n                                    \n                                        <li id="svnuser"><a href="#" onclick="getoperation(\'svnuser\')"><i class="fa fa-angle-double-right"></i>SVN\xe7\x94\xa8\xe6\x88\xb7</a></li>\n                                    \n                                </ul>\n                            </li>\n                        \n                            <li id="host_mgt" class="treeview">\n                                <a href="#">\n                                    <span>\xe4\xb8\xbb\xe6\x9c\xba\xe7\xae\xa1\xe7\x90\x86</span>\n                                    <i class="fa fa-angle-left pull-right"></i>\n                                </a>\n                                <ul class="treeview-menu">\n                                    \n                                        <li id="hostlist"><a href="#" onclick="getoperation(\'hostlist\')"><i class="fa fa-angle-double-right"></i>\xe4\xb8\xbb\xe6\x9c\xba\xe5\x88\x97\xe8\xa1\xa8</a></li>\n                                    \n                                </ul>\n                            </li>\n                        \n                            <li id="publish_mgt" class="treeview">\n                                <a href="#">\n                                    <span>\xe7\x89\x88\xe6\x9c\xac\xe7\xae\xa1\xe7\x90\x86</span>\n                                    <i class="fa fa-angle-left pull-right"></i>\n                                </a>\n                                <ul class="treeview-menu">\n                                    \n                                        <li id="ver_publish"><a href="#" onclick="getoperation(\'ver_publish\')"><i class="fa fa-angle-double-right"></i>\xe5\x8f\x91\xe5\xb8\x83\xe7\x89\x88\xe6\x9c\xac</a></li>\n                                    \n                                        <li id="ver_rollback"><a href="#" onclick="getoperation(\'ver_rollback\')"><i class="fa fa-angle-double-right"></i>\xe7\x89\x88\xe6\x9c\xac\xe5\x9b\x9e\xe6\xbb\x9a</a></li>\n                                    \n                                        <li id="ver_event"><a href="#" onclick="getoperation(\'ver_event\')"><i class="fa fa-angle-double-right"></i>\xe5\x8f\x91\xe5\xb8\x83\xe8\xae\xb0\xe5\xbd\x95</a></li>\n                                    \n                                        <li id="ver_business"><a href="#" onclick="getoperation(\'ver_business\')"><i class="fa fa-angle-double-right"></i>\xe4\xb8\x9a\xe5\x8a\xa1\xe7\x8a\xb6\xe6\x80\x81</a></li>\n                                    \n                                </ul>\n                            </li>\n                        \n                            <li id="business_mgt" class="treeview">\n                                <a href="#">\n                                    <span>\xe4\xb8\x9a\xe5\x8a\xa1\xe7\xae\xa1\xe7\x90\x86</span>\n                                    <i class="fa fa-angle-left pull-right"></i>\n                                </a>\n                                <ul class="treeview-menu">\n                                    \n                                        <li id="businesslist"><a href="#" onclick="getoperation(\'businesslist\')"><i class="fa fa-angle-double-right"></i>\xe4\xb8\x9a\xe5\x8a\xa1\xe5\x88\x97\xe8\xa1\xa8</a></li>\n                                    \n                                </ul>\n                            </li>\n                        \n                            <li id="module_mgt" class="treeview">\n                                <a href="#">\n                                    <span>\xe6\xa8\xa1\xe5\x9d\x97\xe7\xae\xa1\xe7\x90\x86</span>\n                                    <i class="fa fa-angle-left pull-right"></i>\n                                </a>\n                                <ul class="treeview-menu">\n                                    \n                                        <li id="modulelist"><a href="#" onclick="getoperation(\'modulelist\')"><i class="fa fa-angle-double-right"></i>\xe6\xa8\xa1\xe5\x9d\x97\xe5\x88\x97\xe8\xa1\xa8</a></li>\n                                    \n                                </ul>\n                            </li>\n                        \n                    </ul>\n                </section>\n                <!-- \xe5\xb7\xa6\xe4\xbe\xa7\xe8\x8f\x9c\xe5\x8d\x95\xe7\xbb\x93\xe6\x9d\x9f -->\n            </aside>\n\n            <!-- Right side column. Contains the navbar and content of the page -->\n            \n<div class="wrapper row-offcanvas row-offcanvas-left">\n    <!-- Left side column. contains the logo and sidebar -->\n    <!-- Right side column. Contains the navbar and content of the page -->\n    <aside class="right-side">\n        <!-- Content Header (Page header) -->\n        <section class="content-header">\n            <h1>\n                <a id="cu_posistion"><i class=""></i>Home</a>\n\n            </h1>\n\n\n\n\n        </section>\n\n        <!-- Main content -->\n        <section class="content">\n        </section>\n    </aside>\n</div>\n\n\n\n        </div><!-- ./wrapper -->\n\n\n<!-- jQuery 2.0.2 -->\n<script src="http://cdn.bootcss.com/jquery/2.0.2/jquery.min.js"></script>\n<!-- jQuery UI 1.10.3 -->\n<script src="/static/js/jquery-ui-1.10.3.min.js" type="text/javascript"></script>\n<!-- Bootstrap -->\n<script src="/static/js/bootstrap.min.js" type="text/javascript"></script>\n<!-- AdminLTE App -->\n<script src="/static/js/AdminLTE/app.js" type="text/javascript"></script>\n<script src="/static/js/cookies.js" type="text/javascript"></script>\n\n<!-- jQuery Knob Chart -->\n\n\n<!-- Sparkline -->\n\n<!-- jvectormap -->\n\n\n<!-- Bootstrap WYSIHTML5 -->\n\n<!-- fullCalendar -->\n\n<!-- Morris.js charts -->\n\n<!-- daterangepicker -->\n\n<!-- iCheck -->\n\n<!-- AdminLTE dashboard demo (This is only for demo purposes) -->\n\n\n\n<script>\n\n        // \xe8\x8e\xb7\xe5\x8f\x96\xe5\x8a\x9f\xe8\x83\xbd\xe6\xa8\xa1\xe5\x9d\x97\xe5\x88\x97\xe8\xa1\xa8\n        function getoperation(ops) {\n            //$.post(\'/api/getUserlist/\',{\'csrfmiddlewaretoken\':GetCSRFToken()},function(data, status){\n            if ("True" == "False") {\n                window.location.href = "/login/";\n            }\n            $.post(\'/api/?ac=\'+ops,function(data, status){\n                $(\'.content\').html(data);\n            });\n        }\n\n    // \xe4\xbf\xae\xe6\x94\xb9\xe7\x94\xa8\xe6\x88\xb7\xe4\xbf\xa1\xe6\x81\xaf\n    function edituser(ths,id){\n        if(id != null){\n            try{\n                id = parseInt(id);\n                addurl = \'&id=\'+id;\n            }catch(error){\n                addurl = \'\';\n            }\n        }\n        $.get(\'/detail/user/?ac=edit\'+addurl, function(data, status){\n            try{\n                data = JSON.parse(data);\n                if(data[\'code\'] != \'0\'){\n                    alert(JSON.parse(data)[\'error\']);\n                }\n            }catch(e){\n                $(\'.content\').html(data);\n            }\n        });\n    }\n\n</script>\n    </body>\n</html>' is not JSON serializable
+2016-07-19 10:19:09,447 [Thread-25:18980] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-07-19 18:20:35,066 [Thread-16:10184] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-07-19 18:20:36,677 [Thread-19:15052] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-07-19 18:20:36,894 [Thread-21:13408] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-07-28 12:05:27,042 [Thread-54:13008] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-07-28 14:26:54,160 [Thread-8:25176] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 99, in businessOperator
+    return render(request, 'pages/businessdetail.html', {'businessEditFormObj':businessEditFormObj, 'bid':businessObj.id})
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader.py", line 97, in render_to_string
+    return template.render(context, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\backends\django.py", line 95, in render
+    return self.template.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 206, in render
+    return self._render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 197, in _render
+    return self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader_tags.py", line 60, in render
+    result = self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1049, in render
+    return render_value_in_context(output, context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1026, in render_value_in_context
+    value = force_text(value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\encoding.py", line 76, in force_text
+    s = six.text_type(s)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\html.py", line 390, in <lambda>
+    klass.__str__ = lambda self: mark_safe(klass_str(self))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 43, in __str__
+    return self.as_widget()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 101, in as_widget
+    return force_text(widget.render(name, self.value(), attrs=attrs))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 600, in render
+    options = self.render_options(choices, value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 552, in render_options
+    selected_choices = set(force_text(v) for v in selected_choices)
+TypeError: 'ManyRelatedManager' object is not iterable
+2016-07-28 14:26:55,657 [Thread-9:24104] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 99, in businessOperator
+    return render(request, 'pages/businessdetail.html', {'businessEditFormObj':businessEditFormObj, 'bid':businessObj.id})
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader.py", line 97, in render_to_string
+    return template.render(context, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\backends\django.py", line 95, in render
+    return self.template.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 206, in render
+    return self._render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 197, in _render
+    return self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader_tags.py", line 60, in render
+    result = self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1049, in render
+    return render_value_in_context(output, context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1026, in render_value_in_context
+    value = force_text(value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\encoding.py", line 76, in force_text
+    s = six.text_type(s)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\html.py", line 390, in <lambda>
+    klass.__str__ = lambda self: mark_safe(klass_str(self))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 43, in __str__
+    return self.as_widget()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 101, in as_widget
+    return force_text(widget.render(name, self.value(), attrs=attrs))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 600, in render
+    options = self.render_options(choices, value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 552, in render_options
+    selected_choices = set(force_text(v) for v in selected_choices)
+TypeError: 'ManyRelatedManager' object is not iterable
+2016-07-28 14:26:56,273 [Thread-10:25852] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 99, in businessOperator
+    return render(request, 'pages/businessdetail.html', {'businessEditFormObj':businessEditFormObj, 'bid':businessObj.id})
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader.py", line 97, in render_to_string
+    return template.render(context, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\backends\django.py", line 95, in render
+    return self.template.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 206, in render
+    return self._render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 197, in _render
+    return self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader_tags.py", line 60, in render
+    result = self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1049, in render
+    return render_value_in_context(output, context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1026, in render_value_in_context
+    value = force_text(value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\encoding.py", line 76, in force_text
+    s = six.text_type(s)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\html.py", line 390, in <lambda>
+    klass.__str__ = lambda self: mark_safe(klass_str(self))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 43, in __str__
+    return self.as_widget()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 101, in as_widget
+    return force_text(widget.render(name, self.value(), attrs=attrs))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 600, in render
+    options = self.render_options(choices, value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 552, in render_options
+    selected_choices = set(force_text(v) for v in selected_choices)
+TypeError: 'ManyRelatedManager' object is not iterable
+2016-07-28 14:26:56,447 [Thread-11:25780] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 99, in businessOperator
+    return render(request, 'pages/businessdetail.html', {'businessEditFormObj':businessEditFormObj, 'bid':businessObj.id})
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader.py", line 97, in render_to_string
+    return template.render(context, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\backends\django.py", line 95, in render
+    return self.template.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 206, in render
+    return self._render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 197, in _render
+    return self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader_tags.py", line 60, in render
+    result = self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1049, in render
+    return render_value_in_context(output, context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1026, in render_value_in_context
+    value = force_text(value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\encoding.py", line 76, in force_text
+    s = six.text_type(s)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\html.py", line 390, in <lambda>
+    klass.__str__ = lambda self: mark_safe(klass_str(self))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 43, in __str__
+    return self.as_widget()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 101, in as_widget
+    return force_text(widget.render(name, self.value(), attrs=attrs))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 600, in render
+    options = self.render_options(choices, value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 552, in render_options
+    selected_choices = set(force_text(v) for v in selected_choices)
+TypeError: 'ManyRelatedManager' object is not iterable
+2016-07-28 14:26:56,645 [Thread-12:25184] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 99, in businessOperator
+    return render(request, 'pages/businessdetail.html', {'businessEditFormObj':businessEditFormObj, 'bid':businessObj.id})
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader.py", line 97, in render_to_string
+    return template.render(context, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\backends\django.py", line 95, in render
+    return self.template.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 206, in render
+    return self._render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 197, in _render
+    return self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader_tags.py", line 60, in render
+    result = self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1049, in render
+    return render_value_in_context(output, context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1026, in render_value_in_context
+    value = force_text(value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\encoding.py", line 76, in force_text
+    s = six.text_type(s)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\html.py", line 390, in <lambda>
+    klass.__str__ = lambda self: mark_safe(klass_str(self))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 43, in __str__
+    return self.as_widget()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 101, in as_widget
+    return force_text(widget.render(name, self.value(), attrs=attrs))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 600, in render
+    options = self.render_options(choices, value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 552, in render_options
+    selected_choices = set(force_text(v) for v in selected_choices)
+TypeError: 'ManyRelatedManager' object is not iterable
+2016-07-28 14:27:12,845 [Thread-13:23768] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 99, in businessOperator
+    return render(request, 'pages/businessdetail.html', {'businessEditFormObj':businessEditFormObj, 'bid':businessObj.id})
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader.py", line 97, in render_to_string
+    return template.render(context, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\backends\django.py", line 95, in render
+    return self.template.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 206, in render
+    return self._render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 197, in _render
+    return self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader_tags.py", line 60, in render
+    result = self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1049, in render
+    return render_value_in_context(output, context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1026, in render_value_in_context
+    value = force_text(value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\encoding.py", line 76, in force_text
+    s = six.text_type(s)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\html.py", line 390, in <lambda>
+    klass.__str__ = lambda self: mark_safe(klass_str(self))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 43, in __str__
+    return self.as_widget()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 101, in as_widget
+    return force_text(widget.render(name, self.value(), attrs=attrs))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 600, in render
+    options = self.render_options(choices, value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 552, in render_options
+    selected_choices = set(force_text(v) for v in selected_choices)
+TypeError: 'ManyRelatedManager' object is not iterable
+2016-07-28 14:28:42,397 [Thread-2:17788] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 101, in businessOperator
+    return render(request, 'pages/businessdetail.html', {'businessEditFormObj':businessEditFormObj, 'bid':businessObj.id})
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\shortcuts.py", line 67, in render
+    template_name, context, request=request, using=using)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader.py", line 97, in render_to_string
+    return template.render(context, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\backends\django.py", line 95, in render
+    return self.template.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 206, in render
+    return self._render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 197, in _render
+    return self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\loader_tags.py", line 60, in render
+    result = self.nodelist.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 992, in render
+    bit = node.render_annotated(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 959, in render_annotated
+    return self.render(context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1049, in render
+    return render_value_in_context(output, context)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\template\base.py", line 1026, in render_value_in_context
+    value = force_text(value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\encoding.py", line 76, in force_text
+    s = six.text_type(s)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\html.py", line 390, in <lambda>
+    klass.__str__ = lambda self: mark_safe(klass_str(self))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 43, in __str__
+    return self.as_widget()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\boundfield.py", line 101, in as_widget
+    return force_text(widget.render(name, self.value(), attrs=attrs))
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 600, in render
+    options = self.render_options(choices, value)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\forms\widgets.py", line 552, in render_options
+    selected_choices = set(force_text(v) for v in selected_choices)
+TypeError: 'ManyRelatedManager' object is not iterable
+2016-07-28 14:29:28,848 [Thread-2:26568] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 97, in businessOperator
+    'host':list(businessObj.host),
+TypeError: 'ManyRelatedManager' object is not iterable
+2016-07-28 14:29:35,506 [Thread-3:26476] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 97, in businessOperator
+    'host':list(businessObj.host),
+TypeError: 'ManyRelatedManager' object is not iterable
+2016-07-28 14:29:59,305 [Thread-2:24348] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 97, in businessOperator
+    'host':list(businessObj.host),
+TypeError: 'ManyRelatedManager' object is not iterable
+2016-07-28 14:30:07,661 [Thread-3:25780] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 97, in businessOperator
+    'host':list(businessObj.host),
+TypeError: 'ManyRelatedManager' object is not iterable
+2016-07-28 14:36:30,740 [Thread-4:25132] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-07-28 14:41:24,226 [Thread-4:24076] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 121, in businessOperator
+    businessObj.host.remove(bh)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\fields\related_descriptors.py", line 856, in remove
+    (opts.app_label, opts.object_name)
+AttributeError: Cannot use remove() on a ManyToManyField which specifies an intermediary model. Use core.business_host's Manager instead.
+2016-07-28 14:43:58,484 [Thread-4:25580] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 123, in businessOperator
+    businessObj.host.add(businessEditFormObj.clean()['host'])
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\fields\related_descriptors.py", line 838, in add
+    (opts.app_label, opts.object_name)
+AttributeError: Cannot use add() on a ManyToManyField which specifies an intermediary model. Use core.business_host's Manager instead.
+2016-07-28 14:46:00,716 [Thread-4:25332] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-07-28 15:02:45,438 [Thread-9:25840] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-07-28 15:04:24,088 [Thread-5:6984] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-07-28 15:04:52,094 [Thread-16:25668] [django.request:103] [csrf:_reject] [WARNING]- Forbidden (CSRF token missing or incorrect.): /api/
+2016-07-28 16:46:55,109 [Thread-2:27392] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/sysuser/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 17, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\sysuser_ops.py", line 40, in sysUserOperator
+    sysUserObj.host_id = int(sysUserFormObj.clean()['host_id'])
+TypeError: int() argument must be a string, a bytes-like object or a number, not 'host'
+2016-07-29 10:10:50,802 [Thread-33:27136] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-07-29 10:10:50,878 [Thread-34:28216] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-08-02 16:28:55,510 [Thread-2:23276] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/svnuser/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 17, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\svnuser_ops.py", line 35, in svnUserOperator
+    svnUserObj.host_id = int(svnUserFormObj.clean()['host_id'])
+TypeError: int() argument must be a string, a bytes-like object or a number, not 'host'
+2016-08-03 09:45:43,677 [Thread-2:16824] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-08-03 09:45:43,677 [Thread-3:42180] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2016-08-03 16:17:18,924 [Thread-35:29116] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/svnuser/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\backends\utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\backends\mysql\base.py", line 112, in execute
+    return self.cursor.execute(query, args)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\cursors.py", line 161, in execute
+    result = self._query(query)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\cursors.py", line 317, in _query
+    conn.query(q)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\connections.py", line 837, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\connections.py", line 1021, in _read_query_result
+    result.read()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\connections.py", line 1304, in read
+    first_packet = self.connection._read_packet()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\connections.py", line 983, in _read_packet
+    packet.check_error()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\connections.py", line 395, in check_error
+    err.raise_mysql_exception(self._data)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\err.py", line 120, in raise_mysql_exception
+    _check_mysql_exception(errinfo)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\err.py", line 112, in _check_mysql_exception
+    raise errorclass(errno, errorvalue)
+pymysql.err.IntegrityError: (1062, "Duplicate entry '4-chenjz' for key 'core_svn_user_host_id_d86713c9_uniq'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 17, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\svnuser_ops.py", line 78, in svnUserOperator
+    svnUserObj.save()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\base.py", line 708, in save
+    force_update=force_update, update_fields=update_fields)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\base.py", line 736, in save_base
+    updated = self._save_table(raw, cls, force_insert, force_update, using, update_fields)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\base.py", line 801, in _save_table
+    forced_update)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\base.py", line 851, in _do_update
+    return filtered._update(values) > 0
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\query.py", line 645, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\sql\compiler.py", line 1149, in execute_sql
+    cursor = super(SQLUpdateCompiler, self).execute_sql(result_type)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\sql\compiler.py", line 848, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\backends\utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\utils.py", line 95, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\utils\six.py", line 685, in reraise
+    raise value.with_traceback(tb)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\backends\utils.py", line 64, in execute
+    return self.cursor.execute(sql, params)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\backends\mysql\base.py", line 112, in execute
+    return self.cursor.execute(query, args)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\cursors.py", line 161, in execute
+    result = self._query(query)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\cursors.py", line 317, in _query
+    conn.query(q)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\connections.py", line 837, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\connections.py", line 1021, in _read_query_result
+    result.read()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\connections.py", line 1304, in read
+    first_packet = self.connection._read_packet()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\connections.py", line 983, in _read_packet
+    packet.check_error()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\connections.py", line 395, in check_error
+    err.raise_mysql_exception(self._data)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\err.py", line 120, in raise_mysql_exception
+    _check_mysql_exception(errinfo)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\pymysql\err.py", line 112, in _check_mysql_exception
+    raise errorclass(errno, errorvalue)
+django.db.utils.IntegrityError: (1062, "Duplicate entry '4-chenjz' for key 'core_svn_user_host_id_d86713c9_uniq'")
+2016-08-03 16:18:26,690 [Thread-49:27996] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/version/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-08-03 16:18:35,487 [Thread-53:26432] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/version/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-08-03 16:18:47,280 [Thread-57:26328] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/version/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-08-03 16:21:21,341 [Thread-64:13984] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/version/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-08-03 16:21:49,286 [Thread-3:41580] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/version/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-08-03 16:22:19,417 [Thread-3:37376] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/version/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-08-03 16:37:14,000 [Thread-4:43276] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 150, in businessOperator
+    business_host.objects.get(host=bh).delete()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\manager.py", line 122, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\query.py", line 391, in get
+    (self.model._meta.object_name, num)
+core.models.MultipleObjectsReturned: get() returned more than one business_host -- it returned 2!
+2016-08-03 16:37:29,171 [Thread-7:34608] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 150, in businessOperator
+    business_host.objects.get(host=bh).delete()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\manager.py", line 122, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\query.py", line 391, in get
+    (self.model._meta.object_name, num)
+core.models.MultipleObjectsReturned: get() returned more than one business_host -- it returned 2!
+2016-08-03 16:38:07,970 [Thread-10:19376] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 150, in businessOperator
+    business_host.objects.get(host=bh).delete()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\manager.py", line 122, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\query.py", line 391, in get
+    (self.model._meta.object_name, num)
+core.models.MultipleObjectsReturned: get() returned more than one business_host -- it returned 2!
+2016-08-03 16:38:15,368 [Thread-13:5752] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 150, in businessOperator
+    business_host.objects.get(host=bh).delete()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\manager.py", line 122, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\query.py", line 391, in get
+    (self.model._meta.object_name, num)
+core.models.MultipleObjectsReturned: get() returned more than one business_host -- it returned 2!
+2016-08-03 16:38:22,641 [Thread-16:14056] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 150, in businessOperator
+    business_host.objects.get(host=bh).delete()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\manager.py", line 122, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\query.py", line 391, in get
+    (self.model._meta.object_name, num)
+core.models.MultipleObjectsReturned: get() returned more than one business_host -- it returned 2!
+2016-08-03 16:38:31,573 [Thread-19:42652] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/business/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\decorators.py", line 25, in wrapper
+    return func(request, *args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops\core\generalObjectOperator\business_ops.py", line 150, in businessOperator
+    business_host.objects.get(host=bh).delete()
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\manager.py", line 122, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\db\models\query.py", line 391, in get
+    (self.model._meta.object_name, num)
+core.models.MultipleObjectsReturned: get() returned more than one business_host -- it returned 2!
+2016-08-03 16:56:25,428 [Thread-3:44380] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/version/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-08-04 10:41:46,884 [Thread-7:5760] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/version/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-08-04 10:44:26,530 [Thread-13:44696] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/version/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-08-04 10:44:32,667 [Thread-17:44516] [django.request:284] [base:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail/version/
+Traceback (most recent call last):
+  File "D:\WorkSpace\PycharmProjects\smops_env\lib\site-packages\django\core\handlers\base.py", line 158, in get_response
+    % (callback.__module__, view_name))
+ValueError: The view core.decorators.wrapper didn't return an HttpResponse object. It returned None instead.
+2016-08-08 19:01:37,118 [Thread-11:27224] [django.request:182] [base:get_response] [WARNING]- Not Found: /nice ports,/Trinity.txt.bak
+2016-08-15 15:20:30,678 [Thread-4:55820] [django.request:182] [base:get_response] [WARNING]- Not Found: /favicon.ico

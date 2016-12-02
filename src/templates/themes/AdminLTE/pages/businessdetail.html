@@ -1,0 +1,58 @@
+{% load staticfiles %}
+
+{% block right-content %}
+<br>
+<form class="form-horizontal" method="post" action="{% url 'businessdetail' %}?ac=edit&id={{ bid }}" id="editbusinessform">{% csrf_token %}
+  <div class="form-group">
+    <label class="col-sm-1 control-label">业务名</label>
+    <div class="col-sm-4">
+        {{ businessEditFormObj.name }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">运行账户</label>
+    <div class="col-sm-4">
+        {{ businessEditFormObj.running_user }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">业务目录</label>
+    <div class="col-sm-4">
+        {{ businessEditFormObj.directory }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">SVN用户</label>
+    <div class="col-sm-4">
+        {{ businessEditFormObj.svn_user }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">SVN目录</label>
+    <div class="col-sm-4">
+        {{ businessEditFormObj.svn_dir }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">主机</label>
+    <div class="col-sm-4">
+        {{ businessEditFormObj.host }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">状态</label>
+    <div class="col-sm-4">
+        {{ businessEditFormObj.status }}
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-10">
+      <button type="submit" class="btn btn-success">保存</button>
+    </div>
+  </div>
+</form>
+
+
+{% endblock %}

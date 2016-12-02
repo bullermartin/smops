@@ -1,0 +1,144 @@
+{% load staticfiles %}
+{% load tolist %}
+{% block right-content %}
+<div class="col-xs-12">
+    <div class="box box-primary"><!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tr>
+                    <th>用户名</th>
+                    <th>邮箱</th>
+                    <th>状态</th>
+                    <th>最近登录</th>
+                    <th>描述</th>
+                    <th>操作</th>
+                </tr>
+                {% for u in ywuserList %}
+                    <tr><!-- 这里有个bug,当某些值(last_login,desc)为空时会报错 -->
+                        <td>{{ u.name }}</td>
+                        <td>{{ u.email }}</td>
+                        <td>
+                            {% if u.status == 0 %}
+                                <span class="fa fa-check-circle" style="color:green">正常</span>
+                            {% else %}
+                                <span class="fa fa-minus-circle" style="color:red">关闭</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if u.last_login %}
+                                {{ u.last_login }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if u.desc %}
+                                {{ u.desc }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a class="btn btn-primary" onclick="edituser(this,{{ u.id }})"><span type="button" class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                            {% if request.user.username == 'admin' and u.id != request.user.id %}
+                                <a class="btn btn-danger" onclick="deluser(this,{{ u.id }})"><span type="button" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+                            {% endif %}
+                            <!-- <a class="btn btn-success" onclick="adduser(this)"><span type="button" class="glyphicon glyphicon-plus " aria-hidden="true"></span></a> -->
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr id="trfooter">
+                    <td colspan="8">
+                        <ul class="list-unstyled list-inline" style="margin-bottom: 0px;">
+{#                            <li><label id="f1">全选</label></li>#}
+{#                            <li><label id="f2">取消</label></li>#}
+{#                            <li><label id="f3">反选</label></li>#}
+{#                            <li><label id="f4">删除</label></li>#}
+                            <li onclick="adduser(this)" style="cursor:pointer;"><label id="f5" style="cursor:pointer;">添加</label></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+
+
+<div id="pageinfo" class="row col-xs-12">
+        <div class="row" style="padding-bottom: 10px;">
+            <div class="col-xs-9">
+            <div class=" center-block">第{{ ywuserList.start_index }}至{{ ywuserList.end_index }}条 共{{ ywuserList.paginator.count }}条记录</div>
+        </div>
+            <div class="col-xs-3">
+            <div class="">
+                <ul class="pagination right" style="margin: 0 0;">
+                    {% if ywuserList.has_previous %}
+                        <li class="prev" onclick="getywuserlist({{ ywuserList.previous_page_number }})" style="cursor: pointer"><a>上一页</a></li>
+                    {% else %}
+                       <li class="prev disabled"><a>上一页</a></li>
+                    {% endif %}
+
+                    {% for i in ywuserList.number|tolist:ywuserList.paginator.num_pages %}
+                        {% if ywuserList.number == i %}
+                            <li class="active" onclick="getywuserlist({{ i }})" style="cursor: pointer"><a id="currentpage">{{ i }}</a></li>
+                        {% else %}
+                            <li onclick="getywuserlist({{ i }})" style="cursor: pointer"><a>{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if ywuserList.has_next %}
+                       <li class="next" onclick="getywuserlist({{ ywuserList.next_page_number }})" style="cursor: pointer"><a>下一页</a></li>
+                    {% else %}
+                         <li class="next disabled"><a>下一页</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        </div>
+</div>
+
+</div>
+
+<script>
+    // 获取运维用户列表
+    function getywuserlist(page){
+        try{
+            page = parseInt(page);
+        }catch (error){
+            page = 1;
+        }
+        var csrftoken = getCookie('csrftoken');
+        $.post('{% url "apiindex" %}?ac=ywuser&page='+page,function(data,status){
+            $('.content').html(data);
+        });
+    }
+
+    // 添加用户
+    function adduser(ths){
+        $.get('{% url "userdetail" %}'+'?ac=add',function(data, status){
+            try{
+                data = JSON.parse(data);
+                if(data['code'] != 0){
+                    alert(data['error']);
+                }
+            }catch(error){
+                $('.content').html(data);
+            }
+        });
+    }
+
+    // 删除用户
+    function deluser(ths,uid){
+        if(confirm('确定要删除用户？')){
+            $.post('{% url "userdetail" %}'+'?ac=delete&id='+uid,function(data, status){
+                data = JSON.parse(data);
+                if(data['code'] == '0'){
+                    getywuserlist({{ ywuserList.number }});
+                }else {
+                    alert(data['error']);
+                }
+        });
+        }else {
+            return;
+        }
+
+    }
+
+</script>
+
+
+{% endblock %}

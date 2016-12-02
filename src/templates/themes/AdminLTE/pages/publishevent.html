@@ -1,0 +1,97 @@
+{% load staticfiles %}
+{% load tolist %}
+{% block right-content %}
+<div class="col-xs-12">
+    <div class="box box-primary"><!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover col-xs-12">
+                <thead>
+                    <tr class="col-xs-12">
+                        <th class="col-xs-2">操作者</th>
+                        <th class="col-xs-1">时间</th>
+                        <th class="col-xs-1">来源IP</th>
+                        <th class="col-xs-1">上一版本</th>
+                        <th class="col-xs-1">当前版本</th>
+                        <th class="col-xs-1">回滚版本</th>
+                        <th class="col-xs-2">版本描述</th>
+                        <th class="col-xs-1">状态</th>
+                        <th class="col-xs-2 text-justify">结果</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for pe in publishEventList %}
+                    <tr class="col-xs-12">
+                        <td class="col-xs-2">{{ pe.operator }}</td>
+                        <td class="col-xs-1">{{ pe.datetime }}</td>
+                        <td class="col-xs-1">{{ pe.ipaddr }}</td>
+                        <td class="col-xs-1">{{ pe.original_ver }}</td>
+                        <td class="col-xs-1">{{ pe.current_ver }}</td>
+                        <td class="col-xs-1">{{ pe.rollback_ver }}</td>
+                        <td class="col-xs-2 text-justify">{{ pe.desc }}</td>
+                        <td class="col-xs-1">
+                            {% if pe.status == 0 %}
+                                <span class="fa fa-check-circle" style="color:green">成功</span>
+                            {% else %}
+                                <span class="fa fa-minus-circle" style="color:red">失败</span>
+                            {% endif %}
+                        </td>
+                        <td class="col-xs-2 text-justify">{{ pe.result }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div><!-- /.box-body -->
+    </div><!-- /.box -->
+
+
+<div id="pageinfo" class="row col-xs-12">
+        <div class="row" style="padding-bottom: 10px;">
+            <div class="col-xs-9">
+            <div class=" center-block">第{{ publishEventList.start_index }}至{{ publishEventList.end_index }}条 共{{ publishEventList.paginator.count }}条记录</div>
+        </div>
+            <div class="col-xs-3">
+            <div class="">
+                <ul class="pagination right" style="margin: 0 0;">
+                    {% if publishEventList.has_previous %}
+                        <li class="prev" onclick="getpublisheventlist({{ publishEventList.previous_page_number }})" style="cursor: pointer"><a>上一页</a></li>
+                    {% else %}
+                       <li class="prev disabled"><a>上一页</a></li>
+                    {% endif %}
+
+                    {% for i in publishEventList.number|tolist:publishEventList.paginator.num_pages %}
+                        {% if publishEventList.number == i %}
+                            <li class="active" onclick="getpublisheventlist({{ i }})" style="cursor: pointer"><a id="currentpage">{{ i }}</a></li>
+                        {% else %}
+                            <li onclick="getpublisheventlist({{ i }})" style="cursor: pointer"><a>{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if publishEventList.has_next %}
+                       <li class="next" onclick="getpublisheventlist({{ publishEventList.next_page_number }})" style="cursor: pointer"><a>下一页</a></li>
+                    {% else %}
+                         <li class="next disabled"><a>下一页</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        </div>
+</div>
+
+</div>
+
+<script>
+    // 获取发布记录列表
+    function getpublisheventlist(page){
+        try{
+            page = parseInt(page);
+        }catch (error){
+            page = 1;
+        }
+        var csrftoken = getCookie('csrftoken');
+        $.post('{% url "apiindex" %}?ac=ver_event&page='+page,function(data,status){
+            $('.content').html(data);
+        });
+    }
+</script>
+
+
+{% endblock %}

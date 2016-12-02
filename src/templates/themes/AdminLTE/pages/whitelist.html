@@ -1,0 +1,152 @@
+{% load staticfiles %}
+{% load tolist %}
+{% block right-content %}
+
+<div id="whitelistinfo" class="col-xs-12 box box-primary">
+    <div class="box-body table-responsive no-padding">
+        <select id="whitehost">
+            {% for h in hostList %}
+                <option value="{{ h.id }}">{{ h.name }}</option>
+            {% endfor %}
+        </select>
+        <button class="btn btn-success btn-sm" onclick="getwhitelist(1)">获取</button>
+        <label></label>
+        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black;font-weight: bold">当前主机：</span><span id="whitehost_cu" style="color:red">未连接</span></a>
+        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black;font-weight: bold">返回结果：</span><span id="callbackresult" style="color:red">空</span></a>
+    </div>
+    <div id="whitelist_content"></div>
+</div>
+
+<script>
+    // 获取白名单列表
+    function getwhitelist(page){
+        var whitehost = $('#whitehost').val();
+        if(parseInt(page) > 0){
+            addUrl = '&page='+page;
+        }else {
+            addUrl = ''
+        }
+        var csrftoken = getCookie('csrftoken');
+        $.post('{% url "whitelist" %}?ac=list&id='+whitehost+addUrl,function(data,status){
+            try{
+                data = JSON.parse(data);
+                if(data['code'] != '0'){
+                    alert(data['error']);
+                }
+            } catch (error){
+                $('#whitelist_content').html(data);
+            }
+
+        });
+    }
+
+    // 白名单操作
+    function whitelistops(ths){
+        // 这里应该在前端做好用户输入的判断
+        if ($('#whitehost_cu').text() == '未连接'){return}
+        var hid = $('#whitehost_cu').attr('hid');
+        var ac = $(ths).attr('ac');
+        var snu = $('#trfooter').prev().children('td:first').text();
+        var currentpage = $('#currentpage').text();
+        if(ac == 'add'){
+            var html = '<tr>';
+            html += '<td class="col-xs-1">'+(parseInt(snu)+1)+'</td>';
+            html += '<td class="col-xs-2"><input type="text" size="16" maxlength="18"/></td>';
+            html += '<td class="col-xs-7"><input type="text" size="50" maxlength="255"/></td>';
+            html += '<td class="col-xs-2"><span class="fa fa-check-circle btn btn-success" currentpage="'+currentpage+'" onclick="addwhitelist(this)"></span></td>';
+            html += '</tr>';
+            $('#trfooter').before(html)
+        }
+    }
+
+    // 添加白名单
+    function addwhitelist(ths){
+        var hid = $('#whitehost_cu').attr('hid');
+        var ipaddr = $(ths).parent('td').siblings('td:eq(1)').children('input').val();
+        var desc = $(ths).parent('td').siblings('td:eq(2)').children('input').val();
+        var csrftoken = getCookie('csrftoken');
+        var currentpage = $(ths).attr('currentpage');
+        var data = {
+            'ipaddr':ipaddr,
+            'desc':desc,
+        }
+        data = JSON.stringify(data);
+        $.post('{% url "whitelist" %}?ac=add&id='+hid, {'data':data, 'csrfmiddlewaretoken':csrftoken}, function(data, status){
+            data = JSON.parse(data);
+            if(data['code'] != '0'){
+                $('#callbackresult').text(data['error']);
+            }else {
+                alert(data['result']);
+                getwhitelist(currentpage);
+            }
+        });
+    }
+
+{#    function getwhitelist(ths, page){#}
+{#        var whitehost = $('#whitehost').val();#}
+{#        if(parseInt(page) > 0){#}
+{#            addUrl = '&page='+page;#}
+{#        }else {#}
+{#            addUrl = ''#}
+{#        }#}
+{#        $.post('{% url "whitelist" %}?ac=list&id='+whitehost+addUrl,function(data,status){#}
+{#            data = JSON.parse(data);#}
+{#            if(data['code'] != '0'){#}
+{#                $('#callbackresult').text(data['error'])#}
+{#            }else {#}
+{#                $('#callbackresult').text(data['result'])#}
+{#                var html = '';#}
+{#                for(t in data['whitelist']){#}
+{#                    var h = '<tr>';#}
+{#                    h += '<td class="col-xs-1">'+(parseInt(t)+1)+'</td>';#}
+{#                    h += '<td class="col-xs-2">'+data['whitelist'][t]['ip']+'</td>';#}
+{#                    h += '<td class="col-xs-7">'+data['whitelist'][t]['desc']+'</td>';#}
+{#                    h += '<td class="col-xs-2"></td>';#}
+{#                    html += h;#}
+{#                }#}
+{#                html += '</tr>';#}
+{#                $('#whitehost_cu').text(data['current']);#}
+{#                $('#whitehost_cu').attr('hid',data['hid']);#}
+{#                $('#trtitle').nextUntil('#trfooter').remove();#}
+{#                $('#trtitle').after(html);#}
+{##}
+{#                // 处理分页显示#}
+{#                var html = '';#}
+{#                html += '<div class="col-xs-6">';#}
+{#                html +='    <div class="dataTables_info">第'+data['start_index']+'至'+data['end_index']+'条&nbsp;&nbsp;&nbsp;共'+data['index_count']+'条记录</div>';#}
+{#                html += '</div>';#}
+{#                html += '<div class="col-xs-6">';#}
+{#                html += '    <div class="dataTables_paginate right-side">';#}
+{#                html += '        <ul class="pagination" style="margin: 0 0;">';#}
+{#                if(data['prevpage'] == 0){#}
+{#                    html +='<li class="prev disabled"><a>上一页</a></li>';#}
+{#                }else {#}
+{#                    html += '<li class="prev" onclick="getwhitelist(this, '+data['prevpage']+')" style="cursor: pointer"><a>上一页</a></li>';#}
+{#                }#}
+{#                for( var i=3; i>0; i--) {#}
+{#                    if(data['currentpage']-i > 0){#}
+{#                        html += '<li onclick="getwhitelist(this, '+eval(data['currentpage']-i)+')" style="cursor: pointer;background-color:#3c8dbc"><a>'+eval(data['currentpage']-i)+'</a></li>';#}
+{#                        }#}
+{#                }#}
+{#                html += '<li class="active" onclick="getwhitelist(this, '+data['currentpage']+')" style="cursor: pointer"><a>'+data['currentpage']+'</a></li>';#}
+{##}
+{#                for( var i=1; i<4; i++){#}
+{#                    if(data['currentpage']+i <= data['lastpage']){#}
+{#                        html += '<li onclick="getwhitelist(this, '+eval(data['currentpage']+i)+')" style="cursor: pointer"><a>'+eval(data['currentpage']+i)+'</a></li>';#}
+{#                    }#}
+{#                }#}
+{#                if(data['nextpage'] == 0){#}
+{#                    html += '<li class="next disabled"><a>下一页</a></li>';#}
+{#                }else {#}
+{#                    html += '<li class="next" onclick="getwhitelist(this, '+data['nextpage']+')" style="cursor: pointer"><a>下一页</a></li>';#}
+{#                }#}
+{#                html += '</ul></div></div>';#}
+{##}
+{#                $('#pageinfo').html(html);#}
+{#            }#}
+{#        });#}
+{#    }#}
+</script>
+
+
+{% endblock %}

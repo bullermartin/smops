@@ -1,0 +1,57 @@
+{% load staticfiles %}
+
+{% block right-content %}
+<br>
+<form class="form-horizontal" method="post" action="{% url 'userdetail' %}?ac=edit" id="userdetailform">{% csrf_token %}
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">用户名</label>
+    <div class="col-sm-4">
+        <input id="id_username" maxlength="20" name="username" type="text" readonly="true" value="{{ username }}" style="background-color: #cccccc">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-1 control-label">姓名</label>
+    <div class="col-sm-4">
+        {{ userFormObj.name }}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">密码</label>
+    <div class="col-sm-4">
+        {{ userFormObj.password1 }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">再次输入密码</label>
+    <div class="col-sm-4">
+        {{ userFormObj.password2 }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">Email</label>
+    <div class="col-sm-4">
+        {{ userFormObj.email }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">状态</label>
+    <div class="col-sm-4">
+        {{ userFormObj.status }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">描述</label>
+    <div class="col-sm-4">
+        {{ userFormObj.desc }}
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-10">
+      <button type="submit" class="btn btn-success">保存</button>
+    </div>
+  </div>
+</form>
+
+
+{% endblock %}

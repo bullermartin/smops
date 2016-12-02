@@ -1,0 +1,46 @@
+{% load staticfiles %}
+
+{% block right-content %}
+<br>
+<form class="form-horizontal" method="post" action="{% url 'hostdetail' %}?ac=add" id="addhostform">{% csrf_token %}
+  <div class="form-group">
+    <label class="col-sm-1 control-label">主机名</label>
+    <div class="col-sm-4">
+        {{ hostAddFormObj.name }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">IP地址</label>
+    <div class="col-sm-4">
+        {{ hostAddFormObj.ipaddr }}/{{ hostAddFormObj.prefix }}*掩码留空默认为32
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">端口</label>
+    <div class="col-sm-4">
+        {{ hostAddFormObj.port }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">状态</label>
+    <div class="col-sm-4">
+        {{ hostAddFormObj.status }}
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-1 control-label">描述</label>
+    <div class="col-sm-4">
+        {{ hostAddFormObj.desc }}
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-10">
+      <button type="submit" class="btn btn-success">添加</button>
+    </div>
+  </div>
+</form>
+
+
+{% endblock %}
